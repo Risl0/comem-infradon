@@ -71,7 +71,6 @@ CREATE SCHEMA IF NOT EXISTS staging;
 -- Table de staging : miroir exact du CSV
 -- Tout en TEXT, aucune contrainte
 CREATE TABLE staging.signalement (
-    id TEXT,
     date TEXT,
     signale_par TEXT,
     objet TEXT,
