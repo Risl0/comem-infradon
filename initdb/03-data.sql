@@ -20,5 +20,21 @@ ORDER BY date_normalisee;
 
 insert into public.type_intervention(libelle)
 
-SELECT distinct objet
-FROM staging.intervention;
+   SELECT DISTINCT objet
+   FROM staging.intervention;
+   SELECT objet,
+        CASE
+            WHEN LOWER(objet) LIKE '%réparation%'   OR LOWER(objet) LIKE '%reparation%'   THEN 'réparation'
+            WHEN LOWER(objet) LIKE '%remplacement%'                                                     THEN 'remplacement'
+            WHEN LOWER(objet) LIKE '%nettoyage%'                                                        THEN 'nettoyage'
+            WHEN LOWER(objet) LIKE '%redressage%'                                                       THEN 'redressage mât'
+            WHEN LOWER(objet) LIKE '%remise en service%'                                                THEN 'remise en service'
+            WHEN LOWER(objet) LIKE '%hivernage%'                                                        THEN 'hivernage'
+            WHEN LOWER(objet) LIKE '%peinture%'                                                         THEN 'peinture'
+            WHEN LOWER(objet) LIKE '%détartrage%'   OR LOWER(objet) LIKE '%detartrage%'   THEN 'détartrage'
+            WHEN LOWER(objet) LIKE '%mise à jour%'  OR LOWER(objet) LIKE '%mise a jour%'  THEN 'mise à jour logiciel'
+            ELSE objet
+        END AS type_intervention_normalise
+    FROM staging.intervention
+
+    
