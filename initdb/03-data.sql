@@ -14,3 +14,11 @@ SELECT
     statut
 FROM signalement
 ORDER BY date_normalisee;
+
+
+
+
+insert into public.type_intervention(libelle)
+
+SELECT distinct objet
+FROM staging.intervention;
