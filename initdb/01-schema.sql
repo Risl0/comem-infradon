@@ -25,7 +25,8 @@ CREATE TABLE statut (
     libelle VARCHAR(100) NOT NULL UNIQUE
 );
 
--- Tables avec dépendances simples
+
+
 
 CREATE TABLE signalement (
     id SERIAL PRIMARY KEY,
@@ -34,7 +35,8 @@ CREATE TABLE signalement (
     objet VARCHAR(255),
     description TEXT,
     urgence VARCHAR(50),
-    statut VARCHAR(50)
+    id_statut INT,
+    FOREIGN KEY (id_statut) REFERENCES statut(id)
 );
 
 CREATE TABLE fournisseur_contact (
@@ -69,10 +71,11 @@ CREATE TABLE inventaire_mobilier (
     latitude DECIMAL(10, 7),
     longitude DECIMAL(10, 7),
     date_installation DATE,
-    etat VARCHAR(50),
+    id_etat INT,
     remarque TEXT,
     id_fournisseur_contact INT,
     id_type_mobilier INT,
+    FOREIGN KEY (id_etat) REFERENCES etat(id),
     FOREIGN KEY (id_fournisseur_contact) REFERENCES fournisseur_contact(id),
     FOREIGN KEY (id_type_mobilier) REFERENCES type_mobilier(id)
 );
